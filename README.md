@@ -4,7 +4,7 @@ https://front-5th-chapter4-2-basic-seven.vercel.app/
 https://pagespeed.web.dev/ 에서 비교한 수치
 |URL| 개선 전 | 개선 후( 이미지 변경 예정 )|
 |----|-----|-----|
-|[https://front-5th-chapter4-2-basic-js0pmnv15-devchaeyoungs-projects.vercel.app/](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-js0pmnv15-devchaeyoungs-projects-vercel-app/593mgqgq9k?form_factor=mobile)|![개선 전](./public/imgs/pre-testing.png)|![개선 후](./public/imgs/pre-testing.png)|
+|[https://front-5th-chapter4-2-basic-seven.vercel.app/](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-js0pmnv15-devchaeyoungs-projects-vercel-app/593mgqgq9k?form_factor=mobile)|![개선 전](./public/imgs/pre-testing.png)|![개선 후](./public/imgs/pre-testing.png)|
 
 ### 개선이 되어야하는 부분
 
