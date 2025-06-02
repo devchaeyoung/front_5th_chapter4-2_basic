@@ -4,12 +4,10 @@ https://front-5th-chapter4-2-basic-seven.vercel.app/
 https://pagespeed.web.dev/ 에서 비교한 수치
 |URL| 개선 전 | 개선 후( 이미지 변경 예정 )|
 |----|-----|-----|
-|https://front-5th-chapter4-2-basic-js0pmnv15-devchaeyoungs-projects.vercel.app/|![개선 전](./public/imgs/pre-testing.png)|![개선 후](./public/imgs/pre-testing.png)|
-|https://front-5th-chapter4-2-basic-seven.vercel.app/|![alt text](./public/imgs/cdn-pre-tesing.png)|![alt text](./public/imgs/cdn-pre-tesing.png)|
+|[https://front-5th-chapter4-2-basic-js0pmnv15-devchaeyoungs-projects.vercel.app/](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-js0pmnv15-devchaeyoungs-projects-vercel-app/593mgqgq9k?form_factor=mobile)|![개선 전](./public/imgs/pre-testing.png)|![개선 후](./public/imgs/pre-testing.png)|
 
 ### 개선이 되어야하는 부분
 
-수치는 도메인 https://front-5th-chapter4-2-basic-seven.vercel.app 기준으로 잡았습니다.
 | 지표                                 | 측정치        | 목표치\*    | 상태 | 우선도   |
 | ---------------------------------- | ---------- | -------- | -- | ----- |
 | **Largest Contentful Paint (LCP)** | **15.8 s** | ≤ 2.5 s  | 심각 | **1** |
