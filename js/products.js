@@ -1,14 +1,18 @@
 async function loadProducts() {
-    const response = await fetch("https://fakestoreapi.com/products");
-    const products = await response.json();
-    displayProducts(products);  
+    try {
+         const response = await fetch("https://fakestoreapi.com/products");
+         const products = await response.json();
+         displayProducts(products);  
+    } catch (e) {
+        throw e
+    }
+   
 }
 
-function displayProducts(products) {
+const displayProducts = (products) => {
 
     // Find the container where products will be displayed
     const container = document.querySelector('#all-products .container');
-
    
     // Iterate over each product and create the HTML structure safely
     products.forEach(product => {
@@ -72,4 +76,5 @@ loadProducts();
 for (let i = 0; i < 10000000; i++) {
     const temp = Math.sqrt(i) * Math.sqrt(i);
 }
+
 
