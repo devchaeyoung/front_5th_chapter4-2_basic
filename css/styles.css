@@ -1,9 +1,15 @@
 
-
+@font-face {
+  font-family: 'Heebo';
+  src: url('/fonts/Heebo-VariableFont_wght.woff2') format('woff2'),
+       url('/fonts/Heebo-VariableFont_wght.woff')  format('woff');
+  font-weight: 400;         
+  font-display: swap;
+}
 
 body {
     margin: 0;
-    font-family: 'Heebo';
+    font-family: 'Heebo', system-ui, -apple-system, sans-serif;
     padding-top: 80px;
 }
 
