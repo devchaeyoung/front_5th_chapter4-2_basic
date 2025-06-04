@@ -2,15 +2,6 @@
 URL : https://front-5th-chapter4-2-basic-roan.vercel.app/
 
 ## 개선 전 후 비교
-https://pagespeed.web.dev/ 에서 비교한 수치
-
-- 모바일 개선 [전](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/2rw3wf5wz2?form_factor=mobile) | [후](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/ciiaqeojsy?form_factor=mobile)
-- 데스크탑 개선 [전](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/2rw3wf5wz2?form_factor=desktop)|[후](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/ciiaqeojsy?form_factor=desktop)
----
-|| 개선 전 | 개선 후( 이미지 변경 예정 )|
-|----|-----|-----|
-|모바일|![모바일 개선 전](./docs/imgs/pre-testing.png)|![모바일 개선 후](./docs/imgs/testing.png)|
-|데스크탑|![개선 전 데스크탑](./docs/imgs/pre-testing-desktop.png)|![개선 후 데스크탑](./docs/imgs/testing-desktop.png)|
 
 ### Light House 비교
 
@@ -53,11 +44,24 @@ https://pagespeed.web.dev/ 에서 비교한 수치
 | INP | Interaction to Next Paint | N/A | 🟢 |
 | CLS | Cumulative Layout Shift | N/A | 🟢 |
 
+### Page Speed Insights 비교
+
+https://pagespeed.web.dev/ 에서 비교한 수치
+
+- 모바일 개선 [전](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/2rw3wf5wz2?form_factor=mobile) | [후](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/ciiaqeojsy?form_factor=mobile)
+- 데스크탑 개선 [전](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/2rw3wf5wz2?form_factor=desktop)|[후](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/ciiaqeojsy?form_factor=desktop)
+---
+|| 개선 전 | 개선 후( 이미지 변경 예정 )|
+|----|-----|-----|
+|모바일|![모바일 개선 전](./docs/imgs/pre-testing.png)|![모바일 개선 후](./docs/imgs/testing.png)|
+|데스크탑|![개선 전 데스크탑](./docs/imgs/pre-testing-desktop.png)|![개선 후 데스크탑](./docs/imgs/testing-desktop.png)|
 
 ## 최적화 할 수 있는 것들
 
 - 이미지 리소스 최적화 (layout 관련, 이미지 사이즈 명시 및 해상도 낮추기)
 - js, css 로딩 최적화 (화면에 보이는 것 위주로 랜더링 시키기)
+- 폰트
+- 불필요한 요청 제거하기
 - 이벤트 관리
 - 애니메이션
 
@@ -84,6 +88,7 @@ https://pagespeed.web.dev/ 에서 비교한 수치
 | **FCP (First Contentful Paint)**    | ❌ (참고 지표)             | 첫 번째 DOM 콘텐츠(텍스트/이미지)가 화면에 나타난 시점                         | “빈 화면이 꽤 오래 뜨네.”             |
 
 ### 1. LCP(15.8s)
+Largest Contentful Paint
 | 영역            | 대표 원인                | 핵심 대응책                                                                                                |
 | ------------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
 | **네트워크 지연**   | 느린 TTFB, 무압축·대용량 이미지 | • 서버·CDN 활성화<br>• `next/image` + `priority` 속성으로 AVIF/WEBP 전송<br>• `<link rel="preload">`로 LCP 자원 선적재 |
@@ -96,6 +101,7 @@ https://pagespeed.web.dev/ 에서 비교한 수치
 - <head> 내 preload 삽입 → 실제 LCP 개선 효과 확인 -> 폰트는 로컬에서 받아오는 형태로 변경하기
 
 ### 2. CLS (0.526)
+Cumulative Layout Shift
 | 패턴            | 증상             | 해결 방법                                         |
 | ------------- | -------------- | --------------------------------------------- |
 | 사이즈 없는 이미지·영상 | 로딩 중 영역 확보 안 됨 | `width`·`height` 속성 또는 `aspect-ratio` 지정      |
@@ -109,6 +115,9 @@ https://pagespeed.web.dev/ 에서 비교한 수치
 - 배너·모달은 스크롤 하단 고정 또는 미리 자리 확보
 
 ### 3. TBT (310 ms) — 메인 스레드가 0.3 초 이상 ‘멈춤’
+
+Total Blocking Time
+
 | 원인       | 개선 방안                                                                                   |
 | -------- | --------------------------------------------------------------------------------------- |
 | 번들 크기 과다 | • webpack/rollup 분석 → lodash, moment 등 제거·tree-shake<br>• React 19 `use` API + 스트리밍 SSR |
@@ -146,7 +155,7 @@ https://pagespeed.web.dev/ 에서 비교한 수치
 - `@font-face` + `font-display: swap` – 네트워크 문제로 폰트가 지연되더라도 시스템 폰트로 먼저 넥스트를 보여줄 수 있도록 하였습니다. → FOIT(Flash of Faux Text) 방지
   - `font-display: swap` 텍스트 숨김 문제는 해결하지만 시스템 폰트 사이즈가 달라 레이아웃이 이동되는 문제까지는 해결하지 못해 어느 정도 시스템의 폰트 간격과 사이즈가 맞춰야한다는 점을 알게되었습니다.
 - preload를 추가하여 폰트가 우선 로드될 수 있도록 하였습니다. – LCP 영역 텍스트 폰트를 <head>에서 사전 로드
-- preconnect + crossorigin 속성을 주어 폰트 파일을 CORS-compatible 모드로 요청해 두 번 내려받는 일을 방지하였습니다. – 외부 호스트 TLS 핸드셰이크 1 RTT 절감
+- preconnect + crossorigin 속성을 주어 폰트 파일을 CORS-compatible 모드로 요청해 두 번 내려받는 일을 방지하였습니다. – 외부 호스트 TLS 핸드셰이크 1 RTT 감소
   - preconnect 시 crossorigin을 빼면 브라우저가 CORS 옵션 요청을 추가로 보내 다시 RTT가 늘어날 수 있다는 점을 알게되었습니다.
   - 시스템 폰트 Fallback 이후 실제 커스텀 폰트가 적용될 때 예상치 못한 레이아웃 리플로우가 발생할 수 있다는 것을 알게되었습니다. 주요 상단에 보이는 텍스트일 경우 FOFT(Flash of Faux Text) 회피 기준으로 디자인 글자폭을 확인해야 합니다.
 
