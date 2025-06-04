@@ -1,12 +1,23 @@
-https://front-5th-chapter4-2-basic-seven.vercel.app/
+# 바닐라 JS 프로젝트 성능 개선
+URL : https://front-5th-chapter4-2-basic-seven.vercel.app/
 
 ## 개선 전 후 비교
 https://pagespeed.web.dev/ 에서 비교한 수치
-|URL| 개선 전 | 개선 후( 이미지 변경 예정 )|
+- https://front-5th-chapter4-2-basic-roan.vercel.app/
+---
+|| 개선 전 | 개선 후( 이미지 변경 예정 )|
 |----|-----|-----|
-|[https://front-5th-chapter4-2-basic-seven.vercel.app/](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-js0pmnv15-devchaeyoungs-projects-vercel-app/593mgqgq9k?form_factor=mobile)|![개선 전](./public/imgs/pre-testing.png)|![개선 후](./public/imgs/pre-testing.png)|
+|[모바일](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/2rw3wf5wz2?form_factor=mobile)|![개선 전](./docs/imgs/pre-testing.png)|![개선 후](./docs/imgs/pre-testing.png)|
+|[데스크탑](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/2rw3wf5wz2?form_factor=desktop)|![개선 전-데스크탑](./docs/imgs/pre-testing-desktop.png)|![개선 전-데스크탑](./docs/imgs/pre-testing-desktop.png)|
 
-### 개선이 되어야하는 부분
+## 최적화 할 수 있는 것들
+
+- 이미지 리소스 최적화 (layout 관련, 이미지 사이즈 명시 및 해상도 낮추기)
+- js, css 로딩 최적화 (화면에 보이는 것 위주로 랜더링 시키기)
+- 이벤트 관리
+- 애니메이션
+
+### 지표로 확인하기
 
 | 지표                                 | 측정치        | 목표치\*    | 상태 | 우선도   |
 | ---------------------------------- | ---------- | -------- | -- | ----- |
@@ -19,7 +30,16 @@ https://pagespeed.web.dev/ 에서 비교한 수치
 > 현재 가장 큰 병목은 LCP 지연과 레이아웃 시프트입니다. 이미지 최적화·preload,레이아웃 공간 확보만으로도 점수가 70대까지 빠르게 개선될 가능성이 높습니다. 그 이후 JS 최적화(TBT)와 서버 TTFB 개선을 병행하면 90점대도 충분히 달성 가능합니다.
 
 
-## 개선 우선 순위
+## 용어와 수치로 최적화 부분 이해하기
+
+### 용어 이해하기 
+| 지표 용어                                  | Core Web Vitals 포함 여부 | 정의                                                        | 사용자가 체감하는 문제                 |
+| ----------------------------------- | --------------------- | --------------------------------------------------------- | ---------------------------- |
+| **LCP (Largest Contentful Paint)**  | ✅                     | 뷰포트 안에서 **가장 큰 이미지 또는 블록 텍스트**가 렌더링 완료되는 시간               | “주요 화면이 뜨는데 왜 이렇게 오래 걸려?”    |
+| **INP (Interaction to Next Paint)** | ✅ (2024-03부터 FID 대체)  | 임의의 사용자 입력(클릭, 탭, 키 입력)에 대해 **다음 화면이 그려질 때까지 걸린 지연의 p95** | “버튼 눌렀는데 반응이 한 박자 늦네.”       |
+| **CLS (Cumulative Layout Shift)**   | ✅                     | 페이지 전체 수명 동안 발생한 **예상치 못한 레이아웃 이동의 누적 합계**                | “읽던 글이 갑자기 밀려서 다른 걸 눌러 버렸어.” |
+| **FCP (First Contentful Paint)**    | ❌ (참고 지표)             | 첫 번째 DOM 콘텐츠(텍스트/이미지)가 화면에 나타난 시점                         | “빈 화면이 꽤 오래 뜨네.”             |
+
 ### 1. LCP(15.8s)
 | 영역            | 대표 원인                | 핵심 대응책                                                                                                |
 | ------------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -55,13 +75,10 @@ https://pagespeed.web.dev/ 에서 비교한 수치
 - 이미지·비디오 loading="lazy" + fetchpriority="high" 병행
 - HTTP/2 또는 3 활성화, 압축(Br, Gzip) 확인
 
-## 목표 수치
 
-| 지표           | 타깃 (모바일) |
-| ------------ | -------- |
-| LCP          | < 2.5 s  |
-| INP (또는 TBT) | < 200 ms |
-| CLS          | < 0.10   |
-| FCP          | < 1.8 s  |
 
+# Trouble Shooting 모음
+### vercel 배포하면서 알게된 점 
+- README.md 파일 정리하면서 README.md에 사용되는 이미지는 public 폴더 안에 정리하니 배포된 사이트에 404 코드가 뜸 
+- public 파일이 있으면 우선적으로 public 파일안의 index.html을 찾기 때문에 vercel.json을 설정해두거나 public 파일을 없애면 해결되는 것을 알 수 있었음.
 
