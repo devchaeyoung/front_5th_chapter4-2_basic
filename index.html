@@ -59,9 +59,14 @@
 
 
             <picture>
-                <source media="(max-width: 575px)" srcset="images/Hero_Mobile.webp">
-                <source media="(min-width: 575px) and (max-width: 960px)" srcset="images/Hero_Mobile.webp">
-                <img src="images/Hero_Desktop.webp" alt="An image of a human-shaped mannequin wearing a VR machine on his face">
+                <source media="(max-width: 575px)" width="576" height="576" sizes="100vw"srcset="images/Hero_Mobile.webp">
+                <source media="(min-width: 575px) and (max-width: 960px)" 
+                width="960" height="770" sizes="90vw" srcset="images/Hero_Mobile.webp">
+                <img src="images/Hero_Desktop.webp"
+                width="1920"
+                height="893"
+                sizes="(max-width: 575px) 100vw, (max-width: 959px) 90vw, 1920px" alt="An image of a human-shaped mannequin wearing a VR machine on his face"
+                decoding="async" fetchpriority="high">
             </picture>
 
            
