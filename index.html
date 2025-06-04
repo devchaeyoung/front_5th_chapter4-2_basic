@@ -56,9 +56,12 @@
         
         <section class="hero">
 
-            <img class="desktop" src="images/Hero_Desktop.webp" alt="hero-desktop">
-            <img class="mobile" src="images/Hero_Mobile.webp" alt="hero-mobile">
-            <img class="tablet" src="images/Hero_Tablet.webp" alt="hero-tablet">
+
+            <picture>
+                <source media="(max-width: 575px)" srcset="images/Hero_Mobile.webp">
+                <source media="(min-width: 575px) and (max-width: 960px)" srcset="images/Hero_Mobile.webp">
+                <img src="images/Hero_Desktop.webp" alt="hero-img">
+            </picture>
 
            
             <div class="hero-content">
