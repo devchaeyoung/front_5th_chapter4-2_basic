@@ -1,14 +1,58 @@
 # 바닐라 JS 프로젝트 성능 개선
-URL : https://front-5th-chapter4-2-basic-seven.vercel.app/
+URL : https://front-5th-chapter4-2-basic-roan.vercel.app/
 
 ## 개선 전 후 비교
 https://pagespeed.web.dev/ 에서 비교한 수치
-- https://front-5th-chapter4-2-basic-roan.vercel.app/
+
+- 모바일 개선 [전](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/2rw3wf5wz2?form_factor=mobile) | [후](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/ciiaqeojsy?form_factor=mobile)
+- 데스크탑 개선 [전](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/2rw3wf5wz2?form_factor=desktop)|[후](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/ciiaqeojsy?form_factor=desktop)
 ---
 || 개선 전 | 개선 후( 이미지 변경 예정 )|
 |----|-----|-----|
-|[모바일](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/2rw3wf5wz2?form_factor=mobile)|![개선 전](./docs/imgs/pre-testing.png)|![개선 후](./docs/imgs/pre-testing.png)|
-|[데스크탑](https://pagespeed.web.dev/analysis/https-front-5th-chapter4-2-basic-roan-vercel-app/2rw3wf5wz2?form_factor=desktop)|![개선 전-데스크탑](./docs/imgs/pre-testing-desktop.png)|![개선 전-데스크탑](./docs/imgs/pre-testing-desktop.png)|
+|모바일|![모바일 개선 전](./docs/imgs/pre-testing.png)|![모바일 개선 후](./docs/imgs/testing.png)|
+|데스크탑|![개선 전 데스크탑](./docs/imgs/pre-testing-desktop.png)|![개선 후 데스크탑](./docs/imgs/testing-desktop.png)|
+
+### Light House 비교
+
+## 🚨 웹사이트 성능 개선 전
+
+> 📅 측정 시간: 2025. 6. 2. 오후 1:41:37
+
+### 🎯 Lighthouse 점수
+| 카테고리 | 점수 | 상태 |
+|----------|------|------|
+| Performance | 72% | 🟠 |
+| Accessibility | 82% | 🟠 |
+| Best Practices | 75% | 🟠 |
+| SEO | 82% | 🟠 |
+| PWA | 0% | 🔴 |
+
+### 📊 Core Web Vitals (2024)
+| 메트릭 | 설명 | 측정값 | 상태 |
+|--------|------|--------|------|
+| LCP | Largest Contentful Paint | 14.56s | 🔴 |
+| INP | Interaction to Next Paint | N/A | 🟢 |
+| CLS | Cumulative Layout Shift | 0.011 | 🟢 |
+
+## 🚨 웹사이트 성능 개선 후
+> 📅 측정 시간: 2025. 6. 4. 오후 8:24:07
+
+### 🎯 Lighthouse 점수
+| 카테고리 | 점수 | 상태 |
+|----------|------|------|
+| Performance | 99% | 🟢 |
+| Accessibility | 95% | 🟢 |
+| Best Practices | 96% | 🟢 |
+| SEO | 100% | 🟢 |
+| PWA | 0% | 🔴 |
+
+### 📊 Core Web Vitals (2024)
+| 메트릭 | 설명 | 측정값 | 상태 |
+|--------|------|--------|------|
+| LCP | Largest Contentful Paint | 2.11s | 🟢 |
+| INP | Interaction to Next Paint | N/A | 🟢 |
+| CLS | Cumulative Layout Shift | N/A | 🟢 |
+
 
 ## 최적화 할 수 있는 것들
 
@@ -26,9 +70,8 @@ https://pagespeed.web.dev/ 에서 비교한 수치
 | **Total Blocking Time (TBT)**      | **310 ms** | ≤ 200 ms | 주의 | **2** |
 | First Contentful Paint (FCP)       | 2.4 s      | ≤ 1.8 s  | 보통 | 3     |
 | Speed Index                        | 2.9 s      | ≤ 3.4 s  | 양호 | 4     |
-*목표치는 Core Web Vitals 권장 기준.
-> 현재 가장 큰 병목은 LCP 지연과 레이아웃 시프트입니다. 이미지 최적화·preload,레이아웃 공간 확보만으로도 점수가 70대까지 빠르게 개선될 가능성이 높습니다. 그 이후 JS 최적화(TBT)와 서버 TTFB 개선을 병행하면 90점대도 충분히 달성 가능합니다.
 
+*목표치는 Core Web Vitals 권장 기준.
 
 ## 용어와 수치로 최적화 부분 이해하기
 
@@ -48,9 +91,9 @@ https://pagespeed.web.dev/ 에서 비교한 수치
 | **클라이언트 연산**  | 런타임 이미지 변환·heavy JS  | • 이미지 미리-빌드, 서버 측 변환<br>• React lazy, dynamic import로 fold-below 컴포넌트 지연                              |
 
 #### To Do
-- LCP element(대개 히어로 이미지) 식별 → 용량·포맷 최적화
+- LCP element(대개 히어로 이미지) 식별 → 용량·포맷 최적화 -> jpg, png파일은 webp로 변경하기
 - 서버 응답 시간 측정 → TTFB > 200 ms면 API/SSR 캐시 적용
-- <head> 내 preload 삽입 → 실제 LCP 개선 효과 확인
+- <head> 내 preload 삽입 → 실제 LCP 개선 효과 확인 -> 폰트는 로컬에서 받아오는 형태로 변경하기
 
 ### 2. CLS (0.526)
 | 패턴            | 증상             | 해결 방법                                         |
